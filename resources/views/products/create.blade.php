@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-lg-6">
           <div id="app">
-            <product-add></product-add> <!-- নতুন কম্পোনেন্ট -->
+          <product-add></product-add>
         </div>
         </div>
       
