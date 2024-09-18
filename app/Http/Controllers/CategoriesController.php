@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
@@ -112,5 +113,14 @@ class CategoriesController extends Controller
             flash(message:'Failed to delete')->error();
             return back();
        
+    }
+
+    public function getCategoriesJson() {
+        $categories = Category::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $categories
+        ],Response::HTTP_OK );
     }
 }

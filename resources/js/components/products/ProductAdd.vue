@@ -7,8 +7,10 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="Name">Product Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
-                   
+                        <option v-for="(item, index) in categories" :key="index" :value="item.id">
+                            {{ item.name }}
+                        </option>
+                                      
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -24,7 +26,39 @@
 </template>
 
 <script>
+import store from '../../store';
+// import actions from '../../store/modules/categories/actions';
+import * as actions from "../../store/action-types";
+import { mapGetters } from 'vuex';
+import categories from '../../store/modules/categories';
     export default {
-
+        // Get categories
+computed: {
+    ...mapGetters({
+        'categories' : 'getCategories'
+    })
+},
+       mounted() {
+        store.dispatch(actions.GET_CATEGORIES)
+       }
     }
 </script>
+
+
+<!-- <script>
+import * as actions from "../../store/action-types";
+
+export default {
+    mounted() {
+        // Fetch categories when the component is mounted
+        this.$store.dispatch(actions.GET_CATEGORIES);
+    },
+    computed: {
+        categories() {
+            // Return categories from the Vuex store
+            // return this.$store.state.categories.categories;
+            return this.$store.getters.getCategories;
+        }
+    }
+}
+</script> -->

@@ -49,6 +49,8 @@ Route::put('/categories-update/{id}',[CategoriesController::class,'update'])->na
 Route::post('/categories-store',[CategoriesController::class,'store'])->name('category.store');
 Route::delete('categories-delete/{id}', [CategoriesController::class, 'destroy'])->name('category.delete');  
 
+Route::get('/api/categories',[CategoriesController::class,'getCategoriesJson']);
+
 Route::get('/brands',[BrandController::class,'index'])->name('brands.index');
 Route::get('/brands-create',[BrandController::class,'create'])->name('brands.create');
 Route::get('/brands-edit/{id}',[BrandController::class,'edit'])->name('brands.edit');
