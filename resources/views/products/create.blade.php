@@ -17,14 +17,11 @@
   </div>
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
+        <product-add></product-add>
+        {{-- <div class="col-lg-6">
           <div id="app">
-          <product-add></product-add>
         </div>
-        </div>
-      
-      </div>
+        </div> --}}
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>

@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Size extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['size'];
+
+    protected $appends = ['text'];
+
+    public function getTextAttribute() {
+        return $this->size;
+    }
+
+
+
+
 }

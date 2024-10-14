@@ -1,29 +1,93 @@
 <template>
-    <div class="card card-primary card-outline"><br>
-            <h5 class="card-title text-center">Create product</h5>
-            <div class="card-body">
-              <form action="" method="post">
+    <form @submit.prevent="submitForm" role="form" method="post">
 
+    <div class="row">
+        <div class="col-sm-6">
+        <div class="card card-primary card-outline"><br>
+                <h5 class="card-title text-center">Create product</h5>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="Name">Product Name</label>
-                        <Select2 v-model="form.category_id" :options="categories" :settings ="{placeholder:'Select category'}"></Select2>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="Name">Category <span class="text-danger">*</span> </label>
+                            <Select2 v-model="form.category_id" :options="categories" :settings ="{placeholder:'Select category'}"></Select2>
+                        </div>
+                        <div class="form-group">
+                            <label for="Brand">Brands <span class="text-danger">*</span> </label>
+                            <Select2 v-model="form.brands_id" :options="brands" :settings ="{placeholder:'Select brand'}"></Select2>
+                        </div>
+                        <div class="form-group">
+                            <label for="sku">SkU <span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.sku" class="form-control" placeholder="SKU">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Product name <span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.name" class="form-control" placeholder="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Product image <span class="text-danger">*</span> </label>
+                            <input type="file" class="form-control" placeholder="Image">
+                        </div>
+                        <div class="form-group">
+                            <label for="cost_price">cost Price ($)<span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.cost_price" class="form-control" placeholder="Cost price">
+                        </div>
+                        <div class="form-group">
+                            <label for="Year">Year<span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.year" class="form-control" placeholder="What the current year ? [Ex:2024]">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Product description<span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.description" class="form-control" placeholder="write the product description [Max:200] ">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status<span class="text-danger">*</span> </label>
+                                <select name="status" id="status" class="form-control" v-model="form.status">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Brand">Product Brands</label>
-                        <Select2 v-model="form.brands_id" :options="brands" :settings ="{placeholder:'Select brand'}"></Select2>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary"><li class="fa fa-save"></li> Submit</button>
+                        <a href="" type="submit" class="btn btn-secondary float-right">Back</a>
                     </div>
-                </div>
-                <!-- /.card-body -->
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="" type="submit" class="btn btn-secondary float-right">Back</a>
-                </div>
-            </form>
 
-            </div>
-          </div><!-- /.card -->
+                </div>
+            </div><!-- /.card -->
+        </div>
+
+        <div class="col-sm-6">
+        <div class="card card-primary card-outline"><br>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Product Size</h5>
+                    <br>
+                    <div class="row mt-2" v-for="(item,index) in form.items" :key="index">
+                        <div class="col-sm-4">
+                            <select name="" id="" class="form-control" v-model="item.size_id">
+                                <option value="">Select size</option>
+                                <option v-for="(size, index) in sizes" :key="index" :value="size.id">{{ size.size }}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" v-model="item.location" placeholder="location">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" v-model="item.quantity" placeholder="Quantity">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" @click="deleteItem(index)" class="btn btn-light"><li class="fa fa-trash text-danger"></li></button>
+                        </div>
+                    </div>
+                    <button type="button" @click="addItem" class="btn btn-primary mt-3"><li class="fa fa-plus"></li> Add item</button>
+                </div>
+            </div><!-- /.card -->
+        </div>
+    </div>
+</form>
 </template>
 
 <script>
@@ -33,6 +97,7 @@ import * as actions from "../../store/action-types";
 import { mapGetters } from 'vuex';
 // import categories from '../../store/modules/categories';
 import Select2 from 'v-select2-component'
+import sizes from '../../store/modules/sizes';
 
 export default {
     components: {Select2},
@@ -40,7 +105,22 @@ export default {
         return {
             form: {
                 category_id: 0,
-                brands_id:0
+                brands_id:0,
+                sku:'',
+                name:'',
+                image:'',
+                cost_price:'',
+                retail_price:'',
+                year:'',
+                description:'',
+                status : 1,
+                items : [
+                     {
+                            size_id     :   '',
+                            location    :   '',
+                            quantity    :   0,
+                        }
+                    ],
             }
         }
     },
@@ -48,7 +128,8 @@ export default {
 computed: {
     ...mapGetters({
         'categories' : 'getCategories',
-        'brands'    : 'getBrands'
+        'brands'    : 'getBrands',
+        'sizes'    : 'getSizes',
     })
 },
        mounted() {
@@ -56,32 +137,35 @@ computed: {
         store.dispatch(actions.GET_CATEGORIES)
         //Get Brands
         store.dispatch(actions.GET_BRANDS)
+        //Get Sizes
+        store.dispatch(actions.GET_SIZES)
+       },
+       methods: {
+        addItem() {
+            let item = {
+                            size_id     :   '',
+                            location    :   '',
+                            quantity    :   0,
+                }
+                this.form.items.push(item)
+        },
+            deleteItem(index) {
+                this.form.items.splice(index,1)
+            },
+         submitForm() {
+            console.log(this.form)
+
+         }
        }
     }
 </script>
 
-
-<!-- <script>
-import * as actions from "../../store/action-types";
-
-export default {
-    mounted() {
-        // Fetch categories when the component is mounted
-        this.$store.dispatch(actions.GET_CATEGORIES);
-    },
-    computed: {
-        categories() {
-            // Return categories from the Vuex store
-            // return this.$store.state.categories.categories;
-            return this.$store.getters.getCategories;
-        }
-    }
-}
-</script> -->
-
-
 <style>
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 19px !important;
+}
+.select2-container--default .select2-selection--single {
+    padding-top: 10px !important;
+    padding-bottom: 23px !important;
 }
 </style>

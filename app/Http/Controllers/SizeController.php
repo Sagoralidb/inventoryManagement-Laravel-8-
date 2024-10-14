@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 class SizeController extends Controller
 {
@@ -41,7 +42,7 @@ class SizeController extends Controller
     {
         $size = Size::findOrFail($id);
         return view('sizes.edit',[
-          'size'=>$size  
+          'size'=>$size
         ]);
     }
 
@@ -71,8 +72,18 @@ class SizeController extends Controller
             $size->delete();
             flash(message:'The size deleted successfully')->success();
             return redirect()->route('sizes.index');
-        } 
+        }
             flash(message:"Fail to delete item")->error();
             return back();
+    }
+
+    //Handle Ajax Request
+    public function getSizesJson() {
+        $sizes = Size::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $sizes
+        ],Response::HTTP_OK );
     }
 }

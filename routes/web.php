@@ -65,6 +65,7 @@ Route::get('/sizes-edit/{id}',[SizeController::class,'edit'])->name('sizes.edit'
 Route::put('/sizes-update/{id}',[SizeController::class,'update'])->name('sizes.update');
 Route::post('/sizes-store',[SizeController::class,'store'])->name('sizes.store');
 Route::delete('sizes-delete/{id}', [SizeController::class, 'destroy'])->name('sizes.delete');
+Route::get('/api/sizes',[SizeController::class,'getSizesJson']);
 
 route::get('/product-list',[ProductController::class,'index'])->name('product-list');
 route::get('/product-create',[ProductController::class,'create'])->name('products.create');
