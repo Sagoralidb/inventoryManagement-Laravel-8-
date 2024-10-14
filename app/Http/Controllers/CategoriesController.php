@@ -114,7 +114,7 @@ class CategoriesController extends Controller
             return back();
 
     }
-
+//Handle Ajax Request
     public function getCategoriesJson() {
         $categories = Category::all();
 

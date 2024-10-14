@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
@@ -44,7 +45,7 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
         return view('brands.edit',[
-          'brand'=>$brand  
+          'brand'=>$brand
         ]);
     }
 
@@ -58,7 +59,7 @@ class BrandController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         $brand = Brand::findOrFail($id);
 
         $brand->name = $request->name;
@@ -74,8 +75,18 @@ class BrandController extends Controller
             $brand->delete();
             flash(message:'Brand deleted successfully')->success();
             return redirect()->route('brands.index');
-        } 
+        }
             flash(message:"Fail to delete")->error();
             return back();
+    }
+
+    //Handle Ajax Request
+    public function getBrandsJson() {
+        $brands = Brand::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $brands
+        ],Response::HTTP_OK );
     }
 }

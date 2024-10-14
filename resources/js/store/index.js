@@ -5,9 +5,10 @@ Vue.use(Vuex)
 
 // Modules
 import categories from "./modules/categories";
-
+import brands from "./modules/brands";
 export default new Vuex.Store({
     modules: {
-        categories
+        categories,
+        brands
     }
 });

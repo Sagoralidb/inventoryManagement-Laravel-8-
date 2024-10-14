@@ -47,7 +47,7 @@ Route::get('/categories-create',[CategoriesController::class,'create'])->name('c
 Route::get('/categories-edit/{id}',[CategoriesController::class,'edit'])->name('category.edit');
 Route::put('/categories-update/{id}',[CategoriesController::class,'update'])->name('category.update');
 Route::post('/categories-store',[CategoriesController::class,'store'])->name('category.store');
-Route::delete('categories-delete/{id}', [CategoriesController::class, 'destroy'])->name('category.delete');  
+Route::delete('categories-delete/{id}', [CategoriesController::class, 'destroy'])->name('category.delete');
 
 Route::get('/api/categories',[CategoriesController::class,'getCategoriesJson']);
 
@@ -56,14 +56,15 @@ Route::get('/brands-create',[BrandController::class,'create'])->name('brands.cre
 Route::get('/brands-edit/{id}',[BrandController::class,'edit'])->name('brands.edit');
 Route::put('/brands-update/{id}',[BrandController::class,'update'])->name('brands.update');
 Route::post('/brands-store',[BrandController::class,'store'])->name('brands.store');
-Route::delete('brands-delete/{id}', [BrandController::class, 'destroy'])->name('brands.delete'); 
-   
+Route::delete('brands-delete/{id}', [BrandController::class, 'destroy'])->name('brands.delete');
+Route::get('/api/brands',[BrandController::class,'getBrandsJson']);
+
 Route::get('/sizes',[SizeController::class,'index'])->name('sizes.index');
 Route::get('/sizes-create',[SizeController::class,'create'])->name('sizes.create');
 Route::get('/sizes-edit/{id}',[SizeController::class,'edit'])->name('sizes.edit');
 Route::put('/sizes-update/{id}',[SizeController::class,'update'])->name('sizes.update');
 Route::post('/sizes-store',[SizeController::class,'store'])->name('sizes.store');
-Route::delete('sizes-delete/{id}', [SizeController::class, 'destroy'])->name('sizes.delete');    
+Route::delete('sizes-delete/{id}', [SizeController::class, 'destroy'])->name('sizes.delete');
 
 route::get('/product-list',[ProductController::class,'index'])->name('product-list');
 route::get('/product-create',[ProductController::class,'create'])->name('products.create');
