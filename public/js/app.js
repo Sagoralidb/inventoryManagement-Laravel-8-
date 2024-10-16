@@ -2045,6 +2045,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SIZES);
   },
   methods: {
+    selectImage: function selectImage(e) {
+      this.form.image = e.target.files[0];
+    },
     addItem: function addItem() {
       var item = {
         size_id: '',
@@ -2057,7 +2060,21 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       this.form.items.splice(index, 1);
     },
     submitForm: function submitForm() {
-      console.log(this.form);
+      // console.log(this.form)
+      var data = new FormData();
+      data.append('category_id', this.form.category_id);
+      data.append('brand_id', this.form.brand_id);
+      data.append('sku', this.form.sku);
+      data.append('name', this.form.name);
+      data.append('image', this.form.image);
+      data.append('cost_price', this.form.cost_price);
+      data.append('retail_price', this.form.retail_price);
+      data.append('year', this.form.year);
+      data.append('description', this.form.description);
+      data.append('status', this.form.status);
+      data.append('items', this.form.items);
+      //store all
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_PRODUCT, data);
     }
   }
 });
@@ -2203,7 +2220,18 @@ var render = function render() {
         _vm.$set(_vm.form, "name", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_vm._m(4), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file",
+      placeholder: "Image"
+    },
+    on: {
+      change: _vm.selectImage
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_vm._m(5), _vm._v(" "), _c("input", {
     directives: [{
@@ -2469,21 +2497,13 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
+  return _c("label", {
     attrs: {
       "for": "image"
     }
   }, [_vm._v("Product image "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      type: "file",
-      placeholder: "Image"
-    }
-  })]);
+  }, [_vm._v("*")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -2624,6 +2644,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ADD_PRODUCT: () => (/* binding */ ADD_PRODUCT),
 /* harmony export */   GET_BRANDS: () => (/* binding */ GET_BRANDS),
 /* harmony export */   GET_CATEGORIES: () => (/* binding */ GET_CATEGORIES),
 /* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES)
@@ -2635,6 +2656,8 @@ var GET_CATEGORIES = 'GET_CATEGORIES';
 var GET_BRANDS = 'GET_BRANDS';
 // Sizes
 var GET_SIZES = 'GET_SIZES';
+// Product
+var ADD_PRODUCT = 'ADD_PRODUCT';
 
 /***/ }),
 
@@ -2651,9 +2674,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _modules_categories__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/categories */ "./resources/js/store/modules/categories/index.js");
-/* harmony import */ var _modules_brands__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/brands */ "./resources/js/store/modules/brands/index.js");
-/* harmony import */ var _modules_sizes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sizes */ "./resources/js/store/modules/sizes/index.js");
+/* harmony import */ var _modules_utils_errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/utils/errors */ "./resources/js/store/modules/utils/errors/index.js");
+/* harmony import */ var _modules_categories__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/categories */ "./resources/js/store/modules/categories/index.js");
+/* harmony import */ var _modules_brands__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/brands */ "./resources/js/store/modules/brands/index.js");
+/* harmony import */ var _modules_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sizes */ "./resources/js/store/modules/sizes/index.js");
+/* harmony import */ var _modules_products__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/products */ "./resources/js/store/modules/products/index.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -2662,11 +2687,15 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 
 
 
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    categories: _modules_categories__WEBPACK_IMPORTED_MODULE_2__["default"],
-    brands: _modules_brands__WEBPACK_IMPORTED_MODULE_3__["default"],
-    sizes: _modules_sizes__WEBPACK_IMPORTED_MODULE_4__["default"]
+    categories: _modules_categories__WEBPACK_IMPORTED_MODULE_3__["default"],
+    brands: _modules_brands__WEBPACK_IMPORTED_MODULE_4__["default"],
+    sizes: _modules_sizes__WEBPACK_IMPORTED_MODULE_5__["default"],
+    products: _modules_products__WEBPACK_IMPORTED_MODULE_6__["default"],
+    errors: _modules_utils_errors__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
 
@@ -2882,6 +2911,102 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/products/actions.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/modules/products/actions.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _mutations_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mutations-types */ "./resources/js/store/mutations-types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+// import axios, { Axios } from 'axios'
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_PRODUCT, function (_ref, payload) {
+  var commit = _ref.commit;
+  axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/products', payload).then(function (res) {})["catch"](function (err) {
+    console.log(err.response.data.errors);
+    commit(_mutations_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
+  });
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/products/getters.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/modules/products/getters.js ***!
+  \********************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/products/index.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/modules/products/index.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/store/modules/products/actions.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/store/modules/products/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/modules/products/mutations.js");
+
+
+
+var state = {
+  products: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: (_getters__WEBPACK_IMPORTED_MODULE_1___default()),
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/products/mutations.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/store/modules/products/mutations.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _mutations_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mutations-types */ "./resources/js/store/mutations-types.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _mutations_types__WEBPACK_IMPORTED_MODULE_0__.SET_ERRORS, function (state, payload) {
+  state.is_errors = true;
+  state.errors = payload;
+}));
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/sizes/actions.js":
 /*!*****************************************************!*\
   !*** ./resources/js/store/modules/sizes/actions.js ***!
@@ -2987,6 +3112,82 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/utils/errors/actions.js":
+/*!************************************************************!*\
+  !*** ./resources/js/store/modules/utils/errors/actions.js ***!
+  \************************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/utils/errors/getters.js":
+/*!************************************************************!*\
+  !*** ./resources/js/store/modules/utils/errors/getters.js ***!
+  \************************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/utils/errors/index.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/store/modules/utils/errors/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/store/modules/utils/errors/actions.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/store/modules/utils/errors/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/modules/utils/errors/mutations.js");
+
+
+
+var state = {
+  is_errors: false,
+  errors: []
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: (_getters__WEBPACK_IMPORTED_MODULE_1___default()),
+  actions: (_actions__WEBPACK_IMPORTED_MODULE_0___default()),
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/utils/errors/mutations.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/store/modules/utils/errors/mutations.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _mutations_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../mutations-types */ "./resources/js/store/mutations-types.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _mutations_types__WEBPACK_IMPORTED_MODULE_0__.SET_ERRORS, function (state, payload) {
+  state.is_errors = true;
+  state.errors = payload;
+}));
+
+/***/ }),
+
 /***/ "./resources/js/store/mutations-types.js":
 /*!***********************************************!*\
   !*** ./resources/js/store/mutations-types.js ***!
@@ -2998,6 +3199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SET_BRANDS: () => (/* binding */ SET_BRANDS),
 /* harmony export */   SET_CATEGORIES: () => (/* binding */ SET_CATEGORIES),
+/* harmony export */   SET_ERRORS: () => (/* binding */ SET_ERRORS),
 /* harmony export */   SET_SIZES: () => (/* binding */ SET_SIZES)
 /* harmony export */ });
 //cATEGORIES
@@ -3006,6 +3208,8 @@ var SET_CATEGORIES = 'SET_CATEGORIES';
 var SET_BRANDS = 'SET_BRANDS';
 //sIZES
 var SET_SIZES = 'SET_SIZES';
+//Errors
+var SET_ERRORS = 'SET_ERRORS';
 
 /***/ }),
 

@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Product image <span class="text-danger">*</span> </label>
-                            <input type="file" class="form-control" placeholder="Image">
+                            <input type="file" @change="selectImage" class="form-control" placeholder="Image">
                         </div>
                         <div class="form-group">
                             <label for="cost_price">cost Price ($)<span class="text-danger">*</span> </label>
@@ -141,6 +141,9 @@ computed: {
         store.dispatch(actions.GET_SIZES)
        },
        methods: {
+        selectImage(e){
+          this.form.image = e.target.files[0]
+        },
         addItem() {
             let item = {
                             size_id     :   '',
@@ -149,13 +152,27 @@ computed: {
                 }
                 this.form.items.push(item)
         },
-            deleteItem(index) {
+        deleteItem(index) {
                 this.form.items.splice(index,1)
-            },
+         },
          submitForm() {
-            console.log(this.form)
+            // console.log(this.form)
+            let data = new FormData();
+            data.append('category_id', this.form.category_id)
+            data.append('brand_id', this.form.brand_id)
+            data.append('sku', this.form.sku)
+            data.append('name', this.form.name)
+            data.append('image',this.form.image)
+            data.append('cost_price',this.form.cost_price)
+            data.append('retail_price',this.form.retail_price)
+            data.append('year',this.form.year)
+            data.append('description',this.form.description)
+            data.append('status',this.form.status)
+            data.append('items',this.form.items)
+            //store all
+            store.dispatch(actions.ADD_PRODUCT, data)
+         },
 
-         }
        }
     }
 </script>

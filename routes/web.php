@@ -67,6 +67,8 @@ Route::post('/sizes-store',[SizeController::class,'store'])->name('sizes.store')
 Route::delete('sizes-delete/{id}', [SizeController::class, 'destroy'])->name('sizes.delete');
 Route::get('/api/sizes',[SizeController::class,'getSizesJson']);
 
-route::get('/product-list',[ProductController::class,'index'])->name('product-list');
-route::get('/product-create',[ProductController::class,'create'])->name('products.create');
+Route::get('/product-list',[ProductController::class,'index'])->name('product-list');
+Route::get('/product-create',[ProductController::class,'create'])->name('products.create');
+Route::resource('products', ProductController::class);
+
 } );
