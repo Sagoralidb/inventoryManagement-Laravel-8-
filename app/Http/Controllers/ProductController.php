@@ -26,7 +26,7 @@ class ProductController extends Controller
                 "sku"            => 'required|string|max:200|unique:products',
                 "name"           => 'required|string|min:2|max:200',
                 "image"          => 'required|image|mimes: jpeg,jpg,png|max:1024',
-               " cost_price"     => 'required|numeric',
+                "cost_price"     => 'required|numeric',
                 "retail_price"   => 'required|numeric',
                 "year"           => 'required',
                 "description"    => 'required|max:200',

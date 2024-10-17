@@ -10,7 +10,7 @@ export default {
 
         })
         .catch(err=>{
-            console.log(err.response.data.errors)
+            // console.log(err.response.data.errors)
             commit(mutations.SET_ERRORS, err.response.data.errors)
         })
     }

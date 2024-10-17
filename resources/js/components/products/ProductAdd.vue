@@ -1,6 +1,8 @@
 <template>
     <form @submit.prevent="submitForm" role="form" method="post">
 
+            <show-error></show-error>
+
     <div class="row">
         <div class="col-sm-6">
         <div class="card card-primary card-outline"><br>
@@ -30,6 +32,10 @@
                         <div class="form-group">
                             <label for="cost_price">cost Price ($)<span class="text-danger">*</span> </label>
                             <input type="text" v-model="form.cost_price" class="form-control" placeholder="Cost price">
+                        </div>
+                        <div class="form-group">
+                            <label for="retail_price">Retail price ($)<span class="text-danger">*</span> </label>
+                            <input type="text" v-model="form.retail_price" class="form-control" placeholder="Retail price">
                         </div>
                         <div class="form-group">
                             <label for="Year">Year<span class="text-danger">*</span> </label>
@@ -92,15 +98,17 @@
 
 <script>
 import store from '../../store';
-// import actions from '../../store/modules/categories/actions';
 import * as actions from "../../store/action-types";
 import { mapGetters } from 'vuex';
-// import categories from '../../store/modules/categories';
 import Select2 from 'v-select2-component'
 import sizes from '../../store/modules/sizes';
+import ShowError from './utils/ShowError';
 
 export default {
-    components: {Select2},
+    components: {
+        Select2,
+        ShowError,
+    },
     data() {
         return {
             form: {
@@ -109,7 +117,7 @@ export default {
                 sku:'',
                 name:'',
                 image:'',
-                cost_price:'',
+                cost_price :'',
                 retail_price:'',
                 year:'',
                 description:'',
@@ -159,11 +167,11 @@ computed: {
             // console.log(this.form)
             let data = new FormData();
             data.append('category_id', this.form.category_id)
-            data.append('brand_id', this.form.brand_id)
+            data.append('brands_id', this.form.brands_id)
             data.append('sku', this.form.sku)
             data.append('name', this.form.name)
             data.append('image',this.form.image)
-            data.append('cost_price',this.form.cost_price)
+            data.append('cost_price', this.form.cost_price)
             data.append('retail_price',this.form.retail_price)
             data.append('year',this.form.year)
             data.append('description',this.form.description)
