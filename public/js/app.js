@@ -2013,8 +2013,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   data: function data() {
     return {
       form: {
-        category_id: 0,
-        brands_id: 0,
+        category_id: '',
+        brand_id: '',
         sku: '',
         name: '',
         image: '',
@@ -2064,7 +2064,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       // console.log(this.form)
       var data = new FormData();
       data.append('category_id', this.form.category_id);
-      data.append('brands_id', this.form.brands_id);
+      data.append('brand_id', this.form.brand_id);
       data.append('sku', this.form.sku);
       data.append('name', this.form.name);
       data.append('image', this.form.image);
@@ -2198,11 +2198,11 @@ var render = function render() {
       }
     },
     model: {
-      value: _vm.form.brands_id,
+      value: _vm.form.brand_id,
       callback: function callback($$v) {
-        _vm.$set(_vm.form, "brands_id", $$v);
+        _vm.$set(_vm.form, "brand_id", $$v);
       },
-      expression: "form.brands_id"
+      expression: "form.brand_id"
     }
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "form-group"

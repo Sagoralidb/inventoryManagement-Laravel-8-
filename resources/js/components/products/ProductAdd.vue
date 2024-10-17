@@ -15,7 +15,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Brand">Brands <span class="text-danger">*</span> </label>
-                            <Select2 v-model="form.brands_id" :options="brands" :settings ="{placeholder:'Select brand'}"></Select2>
+                            <Select2 v-model="form.brand_id" :options="brands" :settings ="{placeholder:'Select brand'}"></Select2>
                         </div>
                         <div class="form-group">
                             <label for="sku">SkU <span class="text-danger">*</span> </label>
@@ -112,8 +112,8 @@ export default {
     data() {
         return {
             form: {
-                category_id: 0,
-                brands_id:0,
+                category_id: '',
+                brand_id:'',
                 sku:'',
                 name:'',
                 image:'',
@@ -167,7 +167,7 @@ computed: {
             // console.log(this.form)
             let data = new FormData();
             data.append('category_id', this.form.category_id)
-            data.append('brands_id', this.form.brands_id)
+            data.append('brand_id', this.form.brand_id)
             data.append('sku', this.form.sku)
             data.append('name', this.form.name)
             data.append('image',this.form.image)
