@@ -36,15 +36,26 @@
                 <tr>
                   <th>#Sl</th>
                   <th>Name</th>
-                  <th style="text-align: center">Action</th>  
+                  <th>Price</th>
+                  <th>Retail Price</th>
+                  <th>Sku</th>
+                  <th>Image</th>
+                  <th style="text-align: center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                     @if ($products)
-                        @foreach ($products as $key=>$product )
+                    @foreach($products as $key => $product)
                         <tr>
-                            <td width="25px">{{++$key}}</td>
+                            <td width="25px">{{ count($products) - $loop->index }}</td>
+
                             <td>{{$product->name ?? ''}}</td>
+                            <td>{{$product->cost_price ?? ''}}</td>
+                            <td>{{$product->retail_price ?? ''}}</td>
+                            <td>{{$product->sku ?? ''}}</td>
+                            <td>
+                                <img src="{{asset($product->image)}}" alt="{{$product->name ?? ''}}" style="width: 50px; height:60px; border-radius: 25px; ">
+                            </td>
                             <td class="text-center">
                                 {{-- <a href="{{route('product.edit',$product->id)}}" class="btn btn-sm tbn-info"> <i class="fa fa-edit text-success"></i> Edit</a>
                                 <a href="javascript:void(0);" class="btn btn-sm tbn-info sa-delete" data-form-id="product-delete-{{$product->id}}"> <i class="fa fa-trash text-danger"></i> Delete</a>
@@ -62,7 +73,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-      
+
       </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->
