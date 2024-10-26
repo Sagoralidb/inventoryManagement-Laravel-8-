@@ -189,6 +189,7 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+    'currency_symbol' => env('CURRENCY_SYMBOL', '$'),
 
     'aliases' => [
 

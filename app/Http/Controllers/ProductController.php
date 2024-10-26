@@ -13,7 +13,7 @@ Use Illuminate\Http\Response;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::orderby('created_at','DESC')->get();
+      $products = Product::with(['category','brand'])->get();
 
         $data['products'] = $products;
         return view('products.index',$data);
@@ -89,14 +89,31 @@ class ProductController extends Controller
         return $request->all();
     }
 
+    public function show($id){
+        $product = Product::with(['category','brand','product_stocks.size'])->where('id', $id)->first();
+        return view('products.show', compact('product'));
+    }
 
-    public function edit() {
-
+    public function edit($id) {
+        $product = Product::findOrFail($id);
+        return view('products.edit', compact('product') );
     }
     public function update() {
 
     }
-    public function destroy() {
+    public function destroy($id){
 
+        $deleteItem = Product::findOrFail($id);
+
+        if ($deleteItem->image && file_exists(public_path($deleteItem->image)) ) {
+            unlink(public_path($deleteItem->image));
+        }
+
+        $deleteItem->delete();
+
+        flash('Product deleted successfully')->success();
+        return back();
     }
+
+
 }
