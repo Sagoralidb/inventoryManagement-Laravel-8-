@@ -27,6 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Product image <span class="text-danger">*</span> </label>
+                                <img :src="product.product_image" class="old_image" title="Old image">
                             <input type="file" @change="selectImage" class="form-control" placeholder="Image">
                         </div>
                         <div class="form-group">
@@ -148,6 +149,18 @@ computed: {
         store.dispatch(actions.GET_BRANDS)
         //Get Sizes
         store.dispatch(actions.GET_SIZES)
+
+        // Get old selected data
+        this.form.category_id =this.product.category_id
+        this.form.brand_id =this.product.brand_id
+        this.form.sku= this.product.sku
+        this.form.name=this.product.name
+        this.form.cost_price=this.product.cost_price
+        this.form.retail_price= this.product.retail_price
+        this.form.year = this.product.year
+        this.form.description=this.product.description
+        this.form.status = this.product.status
+        this.form.items = this.product.product_stocks
        },
        methods: {
         selectImage(e){
@@ -167,6 +180,7 @@ computed: {
          submitForm() {
             // console.log(this.form)
             let data = new FormData();
+            data.append('_method', 'PUT')
             data.append('category_id', this.form.category_id)
             data.append('brand_id', this.form.brand_id)
             data.append('sku', this.form.sku)
@@ -178,8 +192,13 @@ computed: {
             data.append('description',this.form.description)
             data.append('status',this.form.status)
             data.append('items', JSON.stringify(this.form.items) ) // Product item has array thats why it json
+
+            let payload = {
+                data: data,
+                id: this.product.id
+            }
             //store all
-            store.dispatch(actions.ADD_PRODUCT, data)
+            store.dispatch(actions.EDIT_PRODUCT, payload)
          },
 
        }
@@ -193,5 +212,10 @@ computed: {
 .select2-container--default .select2-selection--single {
     padding-top: 10px !important;
     padding-bottom: 23px !important;
+}
+.old_image{
+    width: 15%;
+    border-radius: 30%;
+    margin: 10px auto;
 }
 </style>

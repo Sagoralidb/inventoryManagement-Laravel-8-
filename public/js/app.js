@@ -2151,6 +2151,18 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_BRANDS);
     //Get Sizes
     _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SIZES);
+
+    // Get old selected data
+    this.form.category_id = this.product.category_id;
+    this.form.brand_id = this.product.brand_id;
+    this.form.sku = this.product.sku;
+    this.form.name = this.product.name;
+    this.form.cost_price = this.product.cost_price;
+    this.form.retail_price = this.product.retail_price;
+    this.form.year = this.product.year;
+    this.form.description = this.product.description;
+    this.form.status = this.product.status;
+    this.form.items = this.product.product_stocks;
   },
   methods: {
     selectImage: function selectImage(e) {
@@ -2170,6 +2182,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     submitForm: function submitForm() {
       // console.log(this.form)
       var data = new FormData();
+      data.append('_method', 'PUT');
       data.append('category_id', this.form.category_id);
       data.append('brand_id', this.form.brand_id);
       data.append('sku', this.form.sku);
@@ -2181,8 +2194,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       data.append('description', this.form.description);
       data.append('status', this.form.status);
       data.append('items', JSON.stringify(this.form.items)); // Product item has array thats why it json
+
+      var payload = {
+        data: data,
+        id: this.product.id
+      };
       //store all
-      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_PRODUCT, data);
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.EDIT_PRODUCT, payload);
     }
   }
 });
@@ -2857,7 +2875,13 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
-  }, [_vm._m(4), _vm._v(" "), _c("input", {
+  }, [_vm._m(4), _vm._v(" "), _c("img", {
+    staticClass: "old_image",
+    attrs: {
+      src: _vm.product.product_image,
+      title: "Old image"
+    }
+  }), _vm._v(" "), _c("input", {
     staticClass: "form-control",
     attrs: {
       type: "file",
@@ -3350,6 +3374,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ADD_PRODUCT: () => (/* binding */ ADD_PRODUCT),
+/* harmony export */   EDIT_PRODUCT: () => (/* binding */ EDIT_PRODUCT),
 /* harmony export */   GET_BRANDS: () => (/* binding */ GET_BRANDS),
 /* harmony export */   GET_CATEGORIES: () => (/* binding */ GET_CATEGORIES),
 /* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES)
@@ -3363,6 +3388,7 @@ var GET_BRANDS = 'GET_BRANDS';
 var GET_SIZES = 'GET_SIZES';
 // Product
 var ADD_PRODUCT = 'ADD_PRODUCT';
+var EDIT_PRODUCT = 'EDIT_PRODUCT';
 
 /***/ }),
 
@@ -3638,9 +3664,19 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 // import axios, { Axios } from 'axios'
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_PRODUCT, function (_ref, payload) {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty(_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_PRODUCT, function (_ref, payload) {
   var commit = _ref.commit;
   axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/products', payload).then(function (res) {
+    if (res.data.success == true) {
+      window.location.href = '/products';
+    }
+  })["catch"](function (err) {
+    // console.log(err.response.data.errors)
+    commit(_mutations_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
+  });
+}), _action_types__WEBPACK_IMPORTED_MODULE_0__.EDIT_PRODUCT, function (_ref2, payload) {
+  var commit = _ref2.commit;
+  axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/products/".concat(payload.id), payload.data).then(function (res) {
     if (res.data.success == true) {
       window.location.href = '/products';
     }
@@ -16820,7 +16856,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.select2-container--default .select2-selection--single .select2-selection__rendered {\n    line-height: 19px !important;\n}\n.select2-container--default .select2-selection--single {\n    padding-top: 10px !important;\n    padding-bottom: 23px !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.select2-container--default .select2-selection--single .select2-selection__rendered {\n    line-height: 19px !important;\n}\n.select2-container--default .select2-selection--single {\n    padding-top: 10px !important;\n    padding-bottom: 23px !important;\n}\n.old_image{\n    width: 15%;\n    border-radius: 30%;\n    margin: 10px auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

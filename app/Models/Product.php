@@ -13,6 +13,12 @@ class Product extends Model
 
      public const STATUS_ACTIVE   = 1;
      public const STATUS_INACTIVE = 0;
+    //Methods for vue image
+    protected $appends =['product_image'];
+
+    public function getProductImageAttribute() {
+        return asset($this->image);
+    }
 
      public function category() {
         return $this->belongsTo(Category::class);
