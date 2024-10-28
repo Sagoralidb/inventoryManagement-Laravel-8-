@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Redis;
 
 /*
@@ -72,9 +73,12 @@ Route::get('/api/sizes',[SizeController::class,'getSizesJson']);
 Route::get('/product-list',[ProductController::class,'index'])->name('product-list');
 Route::get('/product-create',[ProductController::class,'create'])->name('products.create');
 Route::resource('products', ProductController::class);
+Route::get('api/products', [ProductController::class,'getProductsJson']);
 Route::get('/show-product/{id}',[ProductController::class,'show'])->name('productShow.admin');
 Route::delete('/product.delete/{id}',[ProductController::class,'destroy'])->name('product.delete');
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('editProduct.Admin');
+
+Route::get('/stocks',[StockController::class,'stock'])->name('stockIn');
 
 
 

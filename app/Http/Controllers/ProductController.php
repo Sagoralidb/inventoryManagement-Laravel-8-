@@ -185,5 +185,14 @@ class ProductController extends Controller
         return back();
     }
 
+ //Handle Ajax Request
+ public function getProductsJson() {
+    $products = Product::with(['product_stocks.size'])->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $products
+    ],Response::HTTP_OK );
+}
 
 }

@@ -5,14 +5,14 @@ import Axios from 'axios'
 export default {
     [actions.GET_CATEGORIES]({ commit }) {
         Axios.get('/api/categories')
-        .then(res=>{   
-            if(res.data.success == true) {             
+        .then(res=>{
+            if(res.data.success == true) {
                 commit(mutations.SET_CATEGORIES, res.data.data)
             }
         })
         .catch(err => {
             console.log(err.response)
         })
-        
+
     }
 }

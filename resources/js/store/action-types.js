@@ -9,3 +9,5 @@ export const GET_SIZES = 'GET_SIZES'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
+//GET product fot stock
+export const GET_PRODUCTS  = 'GET_PRODUCTS'
