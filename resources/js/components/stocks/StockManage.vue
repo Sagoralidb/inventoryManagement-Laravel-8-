@@ -12,7 +12,17 @@
                         <div class="form-group">
                             <label for="Name">Product <span class="text-danger">*</span> </label>
                             <Select2 @change="selectedProduct" v-model="form.product_id" :options="products" :settings ="{placeholder:'Select Product'}"></Select2>
-
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Date <span class="text-danger">*</span> </label>
+                                <input type="date" class="form-control" v-model="form.date">
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Stock status <span class="text-danger">*</span> </label>
+                            <Select v-model="form.stock_type" class="form-control">
+                                <option value="in">IN</option>
+                                <option value="out">Our</option>
+                            </Select>
                         </div>
 
                     </div>
@@ -35,7 +45,7 @@
                     <br>
                     <table class="table table-sm">
                         <tr v-for="(item, index) in form.items" :key="index">
-                            <td>{{ item.size.size }}</td>
+                            <td>{{ item.size }}</td>
                             <td>
                                 <input class="form-control" v-model="item.quantity" placeholder="Quantity">
                             </td>
@@ -67,13 +77,10 @@ export default {
     data() {
         return {
             form: {
+                date: '',
+                stock_type:'in',
                 product_id: '',
-                items : [
-                        // {
-                        //     size_id     :   '',
-                        //     quantity    :   0,
-                        // }
-                    ],
+                items : [],
             }
         }
     },
@@ -89,8 +96,20 @@ computed: {
        },
        methods: {
             selectedProduct(id){
+                this.form.items =[]
                 let product = this.products.filter(product=>product.id == id)
-                console.log(product)
+
+                product[0].product_stocks.map(stock=>{
+                    let item ={
+                        size : stock.size.size,
+                        size_id : stock.size_id,
+                        quantity: ''
+                    }
+                    this.form.items.push(item)
+                })
+            },
+            submitForm(){
+                store.dispatch(actions.SUBMIT_STOCKS, this.form)
             }
         }
     }

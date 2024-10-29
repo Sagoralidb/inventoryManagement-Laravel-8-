@@ -9,3 +9,5 @@ export const SET_ERRORS = 'SET_ERRORS'
 
 // Products
 export const SET_PRODUCTS ='SET_PRODUCTS'
+// Stocks
+// export const SET_STOCKS = 'SET_STOCKS'

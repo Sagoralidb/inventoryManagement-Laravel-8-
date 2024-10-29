@@ -2274,13 +2274,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   data: function data() {
     return {
       form: {
+        date: '',
+        stock_type: 'in',
         product_id: '',
-        items: [
-          // {
-          //     size_id     :   '',
-          //     quantity    :   0,
-          // }
-        ]
+        items: []
       }
     };
   },
@@ -2294,10 +2291,22 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   methods: {
     selectedProduct: function selectedProduct(id) {
+      var _this = this;
+      this.form.items = [];
       var product = this.products.filter(function (product) {
         return product.id == id;
       });
-      console.log(product);
+      product[0].product_stocks.map(function (stock) {
+        var item = {
+          size: stock.size.size,
+          size_id: stock.size_id,
+          quantity: ''
+        };
+        _this.form.items.push(item);
+      });
+    },
+    submitForm: function submitForm() {
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_STOCKS, this.form);
     }
   }
 });
@@ -3420,7 +3429,48 @@ var render = function render() {
       },
       expression: "form.product_id"
     }
-  })], 1)]), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c("div", {
+  })], 1), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_vm._m(1), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.date,
+      expression: "form.date"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "date"
+    },
+    domProps: {
+      value: _vm.form.date
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "date", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_vm._m(2), _vm._v(" "), _c("Select", {
+    staticClass: "form-control",
+    model: {
+      value: _vm.form.stock_type,
+      callback: function callback($$v) {
+        _vm.$set(_vm.form, "stock_type", $$v);
+      },
+      expression: "form.stock_type"
+    }
+  }, [_c("option", {
+    attrs: {
+      value: "in"
+    }
+  }, [_vm._v("IN")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "out"
+    }
+  }, [_vm._v("Our")])])], 1)]), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-6"
   }, [_c("div", {
     staticClass: "card card-primary card-outline"
@@ -3433,7 +3483,7 @@ var render = function render() {
   }, _vm._l(_vm.form.items, function (item, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(item.size.size))]), _vm._v(" "), _c("td", [_c("input", {
+    }, [_c("td", [_vm._v(_vm._s(item.size))]), _vm._v(" "), _c("td", [_c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -3464,6 +3514,26 @@ var staticRenderFns = [function () {
       "for": "Name"
     }
   }, [_vm._v("Product "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("label", {
+    attrs: {
+      "for": "Name"
+    }
+  }, [_vm._v("Date "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("label", {
+    attrs: {
+      "for": "Name"
+    }
+  }, [_vm._v("Stock status "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]);
 }, function () {
@@ -3576,7 +3646,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GET_BRANDS: () => (/* binding */ GET_BRANDS),
 /* harmony export */   GET_CATEGORIES: () => (/* binding */ GET_CATEGORIES),
 /* harmony export */   GET_PRODUCTS: () => (/* binding */ GET_PRODUCTS),
-/* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES)
+/* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES),
+/* harmony export */   SUBMIT_STOCKS: () => (/* binding */ SUBMIT_STOCKS)
 /* harmony export */ });
 // Categories
 var GET_CATEGORIES = 'GET_CATEGORIES';
@@ -3590,6 +3661,8 @@ var ADD_PRODUCT = 'ADD_PRODUCT';
 var EDIT_PRODUCT = 'EDIT_PRODUCT';
 //GET product fot stock
 var GET_PRODUCTS = 'GET_PRODUCTS';
+//GET STOCKS
+var SUBMIT_STOCKS = 'SUBMIT_STOCKS';
 
 /***/ }),
 
@@ -3611,11 +3684,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_brands__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/brands */ "./resources/js/store/modules/brands/index.js");
 /* harmony import */ var _modules_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sizes */ "./resources/js/store/modules/sizes/index.js");
 /* harmony import */ var _modules_products__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/products */ "./resources/js/store/modules/products/index.js");
+/* harmony import */ var _modules_stocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/stocks */ "./resources/js/store/modules/stocks/index.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 // Modules
+
 
 
 
@@ -3627,7 +3702,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     brands: _modules_brands__WEBPACK_IMPORTED_MODULE_4__["default"],
     sizes: _modules_sizes__WEBPACK_IMPORTED_MODULE_5__["default"],
     products: _modules_products__WEBPACK_IMPORTED_MODULE_6__["default"],
-    errors: _modules_utils_errors__WEBPACK_IMPORTED_MODULE_2__["default"]
+    errors: _modules_utils_errors__WEBPACK_IMPORTED_MODULE_2__["default"],
+    stocks: _modules_stocks__WEBPACK_IMPORTED_MODULE_7__["default"]
   }
 }));
 
@@ -4074,6 +4150,93 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/stocks/actions.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/modules/stocks/actions.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _mutations_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mutations-types */ "./resources/js/store/mutations-types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+// import axios, { Axios } from 'axios'
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.SUBMIT_STOCKS, function (_ref, payload) {
+  var commit = _ref.commit;
+  axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/stocks', payload).then(function (res) {
+    if (res.data.success == true) {
+      window.location.href = '/stocks';
+    }
+  })["catch"](function (err) {
+    // console.log(err.response.data.errors)
+    commit(_mutations_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
+  });
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/stocks/getters.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/modules/stocks/getters.js ***!
+  \******************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/stocks/index.js":
+/*!****************************************************!*\
+  !*** ./resources/js/store/modules/stocks/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/store/modules/stocks/actions.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/store/modules/stocks/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/modules/stocks/mutations.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mutations__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var state = {
+  stocks: []
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: (_getters__WEBPACK_IMPORTED_MODULE_1___default()),
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: (_mutations__WEBPACK_IMPORTED_MODULE_2___default())
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/stocks/mutations.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/modules/stocks/mutations.js ***!
+  \********************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/utils/errors/actions.js":
 /*!************************************************************!*\
   !*** ./resources/js/store/modules/utils/errors/actions.js ***!
@@ -4187,6 +4350,8 @@ var SET_ERRORS = 'SET_ERRORS';
 
 // Products
 var SET_PRODUCTS = 'SET_PRODUCTS';
+// Stocks
+// export const SET_STOCKS = 'SET_STOCKS'
 
 /***/ }),
 
