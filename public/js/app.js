@@ -2275,7 +2275,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     return {
       form: {
         date: '',
-        stock_type: 'in',
+        stock_type: null,
         product_id: '',
         items: []
       }
@@ -2306,7 +2306,12 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       });
     },
     submitForm: function submitForm() {
-      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_STOCKS, this.form);
+      // console.log("Selected stock_type:", this.form.stock_type);
+      // store.dispatch(actions.SUBMIT_STOCK, this.form)
+      if (!this.form.stock_type) {
+        this.form.stock_type = 'in'; // অথবা প্রয়োজন অনুযায়ী ভ্যালু দিন
+      }
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_STOCK, this.form);
     }
   }
 });
@@ -3453,14 +3458,24 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
-  }, [_vm._m(2), _vm._v(" "), _c("Select", {
-    staticClass: "form-control",
-    model: {
+  }, [_vm._m(2), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
       value: _vm.form.stock_type,
-      callback: function callback($$v) {
-        _vm.$set(_vm.form, "stock_type", $$v);
-      },
       expression: "form.stock_type"
+    }],
+    staticClass: "form-control",
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.form, "stock_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
     }
   }, [_c("option", {
     attrs: {
@@ -3470,7 +3485,7 @@ var render = function render() {
     attrs: {
       value: "out"
     }
-  }, [_vm._v("Our")])])], 1)]), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("OUT")])])])]), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-6"
   }, [_c("div", {
     staticClass: "card card-primary card-outline"
@@ -3529,11 +3544,7 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("label", {
-    attrs: {
-      "for": "Name"
-    }
-  }, [_vm._v("Stock status "), _c("span", {
+  return _c("label", [_vm._v("Stock status "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]);
 }, function () {
@@ -3647,7 +3658,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GET_CATEGORIES: () => (/* binding */ GET_CATEGORIES),
 /* harmony export */   GET_PRODUCTS: () => (/* binding */ GET_PRODUCTS),
 /* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES),
-/* harmony export */   SUBMIT_STOCKS: () => (/* binding */ SUBMIT_STOCKS)
+/* harmony export */   SUBMIT_STOCK: () => (/* binding */ SUBMIT_STOCK)
 /* harmony export */ });
 // Categories
 var GET_CATEGORIES = 'GET_CATEGORIES';
@@ -3662,7 +3673,7 @@ var EDIT_PRODUCT = 'EDIT_PRODUCT';
 //GET product fot stock
 var GET_PRODUCTS = 'GET_PRODUCTS';
 //GET STOCKS
-var SUBMIT_STOCKS = 'SUBMIT_STOCKS';
+var SUBMIT_STOCK = 'SUBMIT_STOCK';
 
 /***/ }),
 
@@ -4172,7 +4183,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 // import axios, { Axios } from 'axios'
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.SUBMIT_STOCKS, function (_ref, payload) {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.SUBMIT_STOCK, function (_ref, payload) {
   var commit = _ref.commit;
   axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/stocks', payload).then(function (res) {
     if (res.data.success == true) {

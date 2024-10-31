@@ -18,11 +18,11 @@
                                 <input type="date" class="form-control" v-model="form.date">
                         </div>
                         <div class="form-group">
-                            <label for="Name">Stock status <span class="text-danger">*</span> </label>
-                            <Select v-model="form.stock_type" class="form-control">
+                            <label >Stock status <span class="text-danger">*</span> </label>
+                            <select v-model="form.stock_type" class="form-control">
                                 <option value="in">IN</option>
-                                <option value="out">Our</option>
-                            </Select>
+                                <option value="out">OUT</option>
+                            </select>
                         </div>
 
                     </div>
@@ -32,7 +32,6 @@
                         <button type="submit" class="btn btn-primary"><li class="fa fa-save"></li> Submit</button>
                         <a href="" type="submit" class="btn btn-secondary float-right">Back</a>
                     </div>
-
 
                 </div>
             </div><!-- /.card -->
@@ -78,9 +77,9 @@ export default {
         return {
             form: {
                 date: '',
-                stock_type:'in',
+                stock_type: null,
                 product_id: '',
-                items : [],
+                items : []
             }
         }
     },
@@ -92,7 +91,7 @@ computed: {
 },
        mounted() {
         //Get Products
-        store.dispatch(actions.GET_PRODUCTS)
+        store.dispatch(actions.GET_PRODUCTS);
        },
        methods: {
             selectedProduct(id){
@@ -109,7 +108,12 @@ computed: {
                 })
             },
             submitForm(){
-                store.dispatch(actions.SUBMIT_STOCKS, this.form)
+                // console.log("Selected stock_type:", this.form.stock_type);
+                // store.dispatch(actions.SUBMIT_STOCK, this.form)
+                if (!this.form.stock_type) {
+                this.form.stock_type = 'in'; // অথবা প্রয়োজন অনুযায়ী ভ্যালু দিন
+            }
+            store.dispatch(actions.SUBMIT_STOCK, this.form);
             }
         }
     }

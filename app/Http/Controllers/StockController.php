@@ -15,6 +15,7 @@ class StockController extends Controller
     }
 
     public function stockSubmit(Request $request) {
+        // return $request->all();
         $validate = Validator::make($request->all(),[
             'product_id' => 'required|numeric',
             'date'       => 'required|string',
@@ -30,7 +31,7 @@ class StockController extends Controller
         }
             //product stock store
         foreach( $request->items as $item){
-            if($item['quantity'] && $item['quantity'] >0) {
+            if($item['quantity'] && $item['quantity'] > 0) {
                 $new_item             =     new ProductStock();
                 $new_item->product_id =     $request->product_id;
                 $new_item->date       =     $request->date;
@@ -45,9 +46,9 @@ class StockController extends Controller
                 ->where('size_id', $item['size_id'])->first();
 
                 if($request->stock_type == ProductStock::STOCK_IN) {
-                    $psq->quantity = $psq->quantity+$item['quantity'];
+                    $psq->quantity = $psq->quantity + $item['quantity'];
                 }else{
-                    $psq->quantity = $psq->quantity-$item['quantity'];
+                    $psq->quantity = $psq->quantity - $item['quantity'];
                 }
 
                 $psq->save();
@@ -60,7 +61,7 @@ class StockController extends Controller
     }
 
     public function history(){
-        $stock = ProductStock::orderby('created_at', 'DESC')->get();
-        return view('stocks.history', compact('stock'));
+       $stocks = ProductStock::orderby('created_at', 'DESC')->with(['product','size'])->get();
+        return view('stocks.history', compact('stocks'));
     }
 }

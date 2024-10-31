@@ -4,7 +4,7 @@ import * as mutations from '../../mutations-types'
 import Axios from 'axios'
 
 export default {
-    [actions.SUBMIT_STOCKS]({commit}, payload) {
+    [actions.SUBMIT_STOCK]({commit}, payload) {
         Axios.post('/stocks', payload)
         .then(res=>{
             if(res.data.success == true) {

@@ -12,4 +12,4 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 //GET product fot stock
 export const GET_PRODUCTS  = 'GET_PRODUCTS'
 //GET STOCKS
-export const SUBMIT_STOCKS = 'SUBMIT_STOCKS'
+export const SUBMIT_STOCK = 'SUBMIT_STOCK'
