@@ -80,7 +80,7 @@ Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('edit
 
 Route::get('/stocks',[StockController::class,'stock'])->name('stockIn');
 Route::post('/stocks',[StockController::class,'stockSubmit'])->name('stockSubmit');
-
+Route::get('/stocks/history',[StockController::class,'history'])->name('stockHistory.admin');
 
 
 } );

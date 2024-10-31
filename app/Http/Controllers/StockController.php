@@ -58,4 +58,9 @@ class StockController extends Controller
             'success' => true,
         ], Response::HTTP_OK);
     }
+
+    public function history(){
+        $stock = ProductStock::orderby('created_at', 'DESC')->get();
+        return view('stocks.history', compact('stock'));
+    }
 }

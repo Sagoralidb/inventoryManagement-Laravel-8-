@@ -15,7 +15,7 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
-  
+
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -26,10 +26,10 @@
               <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4"><h4>Category List</h4></div>
-     
+
                 <div class="col-md-4"><a href="{{route('category.create')}}" class="btn btn-primary" style="float: right;"><li class="fa fa-plus"> Add New</li></a> </div>
               </div>
-              
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,7 +38,7 @@
                 <tr>
                   <th>#Sl</th>
                   <th>Name</th>
-                  <th style="text-align: center">Action</th>  
+                  <th style="text-align: center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,7 +53,7 @@
                                 <form action="{{route('category.delete',$category->id)}}" id="category-delete-{{$category->id}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                </form> 
+                                </form>
                             </td>
                           </tr>
                         @endforeach
@@ -64,7 +64,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-      
+
       </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->

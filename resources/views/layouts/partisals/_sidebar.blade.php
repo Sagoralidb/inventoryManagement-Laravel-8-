@@ -62,6 +62,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('stockHistory.admin')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock History</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inactive Page</p>
