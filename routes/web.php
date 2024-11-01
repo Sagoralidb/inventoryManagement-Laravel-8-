@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReturnProductsController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Redis;
@@ -82,5 +83,7 @@ Route::get('/stocks',[StockController::class,'stock'])->name('stockIn');
 Route::post('/stocks',[StockController::class,'stockSubmit'])->name('stockSubmit');
 Route::get('/stocks/history',[StockController::class,'history'])->name('stockHistory.admin');
 
-
+Route::get('/return-product',[ReturnProductsController::class,'returnProduct'])->name('returnProducts.Admin');
+Route::post('/return-product/submit',[ReturnProductsController::class,'returnProductSubmit'])->name('returnProductSubmit.Admin');
+Route::get('/return-product-history',[ReturnProductsController::class,'history'])->name('returnProductsHistory.admin');
 } );
