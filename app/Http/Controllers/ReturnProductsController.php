@@ -51,7 +51,7 @@ class ReturnProductsController extends Controller
    }
 
    public function history(){
-    $returnProducts = ReturnProduct::orderby('created_at', 'DESC')->with(['product','size'])->get();
-        return view('return_products.history');
+    $returnProductsHistory = ReturnProduct::orderby('created_at', 'DESC')->with(['product','size'])->get();
+        return view('return_products.history', compact('returnProductsHistory'));
     }
 }

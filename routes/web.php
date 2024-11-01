@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReturnProductsController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Redis;
 
 /*
@@ -45,6 +46,8 @@ Route::get('/templates',function(){
     return view('temp');
 });
 Route::middleware(['auth:sanctum'])->group(function(){
+
+Route::resource('users',UsersController::class);
 
 Route::get('/categories',[CategoriesController::class,'index'])->name('category.index');
 Route::get('/categories-create',[CategoriesController::class,'create'])->name('category.create');
