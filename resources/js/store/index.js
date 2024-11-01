@@ -10,6 +10,7 @@ import brands from "./modules/brands";
 import sizes from "./modules/sizes";
 import products from "./modules/products";
 import stocks from "./modules/stocks";
+import return_products from "./modules/return_products";
 export default new Vuex.Store({
     modules: {
         categories,
@@ -18,5 +19,6 @@ export default new Vuex.Store({
         products,
         errors,
         stocks,
+        return_products,
     }
 });

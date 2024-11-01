@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductStock extends Model
 {
     use HasFactory;
+    protected $table ='product_stocks';
+    protected $fillable = ['id','product_id','size_id','quantity','date','status','created_at','updated_at'];
 
     public const STOCK_IN   =   'in';
     public const STOCK_OUT  =   'out';

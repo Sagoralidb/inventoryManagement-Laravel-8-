@@ -84,6 +84,6 @@ Route::post('/stocks',[StockController::class,'stockSubmit'])->name('stockSubmit
 Route::get('/stocks/history',[StockController::class,'history'])->name('stockHistory.admin');
 
 Route::get('/return-product',[ReturnProductsController::class,'returnProduct'])->name('returnProducts.Admin');
-Route::post('/return-product/submit',[ReturnProductsController::class,'returnProductSubmit'])->name('returnProductSubmit.Admin');
+Route::post('/return-product',[ReturnProductsController::class,'returnProductSubmit'])->name('returnProductSubmit.Admin');
 Route::get('/return-product-history',[ReturnProductsController::class,'history'])->name('returnProductsHistory.admin');
 } );

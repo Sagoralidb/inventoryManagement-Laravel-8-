@@ -2275,7 +2275,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     return {
       form: {
         date: '',
-        stock_type: null,
         product_id: '',
         items: []
       }
@@ -2306,12 +2305,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       });
     },
     submitForm: function submitForm() {
-      // console.log("Selected stock_type:", this.form.stock_type);
-      // store.dispatch(actions.SUBMIT_STOCK, this.form)
-      if (!this.form.stock_type) {
-        this.form.stock_type = 'in'; // অথবা প্রয়োজন অনুযায়ী ভ্যালু দিন
-      }
-      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_STOCK, this.form);
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_RETURN_PRODUCT, this.form);
     }
   }
 });
@@ -3493,7 +3487,7 @@ var render = function render() {
     staticClass: "card card-primary card-outline"
   }, [_c("br"), _vm._v(" "), _c("h5", {
     staticClass: "card-title text-center"
-  }, [_vm._v("Stock Manage")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Return Product")]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("div", {
     staticClass: "card-body"
@@ -3538,36 +3532,7 @@ var render = function render() {
         _vm.$set(_vm.form, "date", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
-  }, [_vm._m(2), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.form.stock_type,
-      expression: "form.stock_type"
-    }],
-    staticClass: "form-control",
-    on: {
-      change: function change($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.$set(_vm.form, "stock_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-      }
-    }
-  }, [_c("option", {
-    attrs: {
-      value: "in"
-    }
-  }, [_vm._v("IN")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "out"
-    }
-  }, [_vm._v("OUT")])])])]), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c("div", {
+  })])]), _vm._v(" "), _vm._m(2)])])]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-6"
   }, [_c("div", {
     staticClass: "card card-primary card-outline"
@@ -3610,7 +3575,7 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "Name"
     }
-  }, [_vm._v("Product "), _c("span", {
+  }, [_vm._v("Select Product "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]);
 }, function () {
@@ -3621,12 +3586,6 @@ var staticRenderFns = [function () {
       "for": "Name"
     }
   }, [_vm._v("Date "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("label", [_vm._v("Stock status "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]);
 }, function () {
@@ -3939,6 +3898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GET_CATEGORIES: () => (/* binding */ GET_CATEGORIES),
 /* harmony export */   GET_PRODUCTS: () => (/* binding */ GET_PRODUCTS),
 /* harmony export */   GET_SIZES: () => (/* binding */ GET_SIZES),
+/* harmony export */   SUBMIT_RETURN_PRODUCT: () => (/* binding */ SUBMIT_RETURN_PRODUCT),
 /* harmony export */   SUBMIT_STOCK: () => (/* binding */ SUBMIT_STOCK)
 /* harmony export */ });
 // Categories
@@ -3955,6 +3915,8 @@ var EDIT_PRODUCT = 'EDIT_PRODUCT';
 var GET_PRODUCTS = 'GET_PRODUCTS';
 //GET STOCKS
 var SUBMIT_STOCK = 'SUBMIT_STOCK';
+//Return Product
+var SUBMIT_RETURN_PRODUCT = 'SUBMIT_RETURN_PRODUCT';
 
 /***/ }),
 
@@ -3977,11 +3939,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_sizes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sizes */ "./resources/js/store/modules/sizes/index.js");
 /* harmony import */ var _modules_products__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/products */ "./resources/js/store/modules/products/index.js");
 /* harmony import */ var _modules_stocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/stocks */ "./resources/js/store/modules/stocks/index.js");
+/* harmony import */ var _modules_return_products__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/return_products */ "./resources/js/store/modules/return_products/index.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 // Modules
+
 
 
 
@@ -3995,7 +3959,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     sizes: _modules_sizes__WEBPACK_IMPORTED_MODULE_5__["default"],
     products: _modules_products__WEBPACK_IMPORTED_MODULE_6__["default"],
     errors: _modules_utils_errors__WEBPACK_IMPORTED_MODULE_2__["default"],
-    stocks: _modules_stocks__WEBPACK_IMPORTED_MODULE_7__["default"]
+    stocks: _modules_stocks__WEBPACK_IMPORTED_MODULE_7__["default"],
+    return_products: _modules_return_products__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 }));
 
@@ -4334,6 +4299,93 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _mutations_types__WEBPACK_IMPORTED_MODULE_0__.SET_PRODUCTS, function (state, payload) {
   state.products = payload;
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/return_products/actions.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/store/modules/return_products/actions.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _mutations_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mutations-types */ "./resources/js/store/mutations-types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+// import axios, { Axios } from 'axios'
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.SUBMIT_RETURN_PRODUCT, function (_ref, payload) {
+  var commit = _ref.commit;
+  axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/return-product', payload).then(function (res) {
+    if (res.data.success == true) {
+      window.location.href = '/return-product';
+    }
+  })["catch"](function (err) {
+    // console.log(err.response.data.errors)
+    commit(_mutations_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
+  });
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/return_products/getters.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/store/modules/return_products/getters.js ***!
+  \***************************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/return_products/index.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/store/modules/return_products/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/store/modules/return_products/actions.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/store/modules/return_products/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/modules/return_products/mutations.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mutations__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var state = {
+  return_products: []
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: (_getters__WEBPACK_IMPORTED_MODULE_1___default()),
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: (_mutations__WEBPACK_IMPORTED_MODULE_2___default())
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/return_products/mutations.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/store/modules/return_products/mutations.js ***!
+  \*****************************************************************/
+/***/ (() => {
+
+
 
 /***/ }),
 
