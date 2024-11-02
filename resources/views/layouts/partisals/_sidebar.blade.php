@@ -32,63 +32,57 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('category.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Category</p>
+                <a href="{{ route('category.index') }}" class="nav-link {{ request()->routeIs('category.index') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('brands.index')}}" class="nav-link">
+                <a href="{{route('brands.index')}}" class="nav-link {{request()->routeIs('brands.index') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Brands</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('sizes.index')}}" class="nav-link">
+                <a href="{{route('sizes.index')}}" class="nav-link {{request()->routeIs('sizes.index') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Size</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('product-list')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('product-list')}}" class="nav-link {{request()->routeIs('product-list') ? 'active' : ''}}">
+                  <i class="fab fa-product-hunt nav-icon"></i>
                   <p>Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('stockIn')}}" class="nav-link">
+                <a href="{{route('stockIn')}}" class="nav-link {{request()->routeIs('stockIn') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stock</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('stockHistory.admin')}}" class="nav-link">
+                <a href="{{route('stockHistory.admin')}}" class="nav-link {{request()->routeIs('stockHistory.admin') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stock History</p>
                 </a>
               </li>
             <li class="nav-item">
-                <a href="{{route('returnProducts.Admin')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('returnProducts.Admin')}}" class="nav-link {{request()->routeIs('returnProducts.Admin') ? 'active' : ''}}">
+                  <i class="fab fa-product-hunt nav-icon"></i>
                   <p>Return Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('returnProductsHistory.admin')}}" class="nav-link">
+                <a href="{{route('returnProductsHistory.admin')}}" class="nav-link {{request()->routeIs('returnProductsHistory.admin') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Return History</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link">
+                <a href="{{route('users.index')}}" class="nav-link {{request()->routeIs('users.index') ? 'active' : ''}}">
                     <i class="fas fa-users nav-icon"></i>
                   <p>User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
                 </a>
               </li>
             </ul>
