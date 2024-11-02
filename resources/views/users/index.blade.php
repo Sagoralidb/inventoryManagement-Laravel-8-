@@ -58,7 +58,7 @@
                             <td>{{$user->created_at ? $user->created_at->format('d F, Y:i A') : ''}}</td>
 
                             <td class="text-center">
-                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm tbn-info"> <i class="fa fa-edit text-success"></i> Edit</a>
+                                <a href="{{route('users.edit',$user->id) }}" class="btn btn-sm tbn-info"> <i class="fa fa-edit text-success"></i> Edit</a>
                                @if (auth()->id() != $user->id)
                                <a href="javascript:void(0);" class="btn btn-sm tbn-info sa-delete" data-form-id="user-delete-{{$user->id}}"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                <form action="{{route('users.destroy',$user->id)}}" id="user-delete-{{$user->id}}" method="post">

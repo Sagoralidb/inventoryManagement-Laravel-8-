@@ -81,7 +81,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-users nav-icon"></i>
                   <p>User</p>
                 </a>
               </li>
@@ -94,13 +94,14 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a class="nav-link" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                <i class="nav-icon fas fa-th"></i> {{ __('Logout') }}
+                </a>
+            </form>
           </li>
         </ul>
       </nav>

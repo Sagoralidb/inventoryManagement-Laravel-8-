@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReturnProductsController;
 use App\Http\Controllers\SizeController;
@@ -31,12 +32,12 @@ use Illuminate\Support\Facades\Redis;
 // });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 
 Route::get('/template',function(){
@@ -45,10 +46,14 @@ Route::get('/template',function(){
 Route::get('/templates',function(){
     return view('temp');
 });
+Route::get('/logout',[UsersController::class,'logout'])->name('userLogout.admin');
+
+//Authorize Routes
 Route::middleware(['auth:sanctum'])->group(function(){
 
-Route::resource('users',UsersController::class);
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
+Route::resource('users',UsersController::class);
 Route::get('/categories',[CategoriesController::class,'index'])->name('category.index');
 Route::get('/categories-create',[CategoriesController::class,'create'])->name('category.create');
 Route::get('/categories-edit/{id}',[CategoriesController::class,'edit'])->name('category.edit');
