@@ -10,7 +10,7 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Redis;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +31,14 @@ use Illuminate\Support\Facades\Redis;
 //     })->name('dashboard');
 // });
 
+Route::get('reboot', function () {
+    Artisan::call('storage:link');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:cache');
+         dd("Ready to Start.");
+});
 Route::get('/', function () {
     return view('auth.login');
 });
