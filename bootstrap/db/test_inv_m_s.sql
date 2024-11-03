@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 25, 2024 at 11:04 AM
+-- Generation Time: Nov 03, 2024 at 08:39 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -39,10 +39,8 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Brand1', '2024-10-13 00:06:43', '2024-10-13 00:06:43'),
-(2, 'Test', '2024-10-13 00:06:48', '2024-10-13 00:06:48'),
-(3, 'Kaji Nozrul Islam', '2024-10-13 00:07:03', '2024-10-13 00:07:03'),
-(4, 'ttttt', '2024-10-25 02:13:20', '2024-10-25 02:13:20');
+(1, 'Lora', '2024-11-01 07:56:23', '2024-11-01 07:56:23'),
+(2, 'Gucchi', '2024-11-01 07:56:29', '2024-11-01 07:56:29');
 
 -- --------------------------------------------------------
 
@@ -62,9 +60,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'test1', '2024-10-13 00:05:56', '2024-10-13 00:05:56'),
-(2, 'book', '2024-10-13 00:06:02', '2024-10-13 00:06:02'),
-(3, 'City', '2024-10-13 00:06:14', '2024-10-13 00:06:14');
+(1, 'Test', '2024-11-01 07:55:40', '2024-11-01 07:55:40'),
+(2, 'Man\'s Fashion', '2024-11-01 07:55:50', '2024-11-01 07:55:50'),
+(3, 'Woman\'s Fashion', '2024-11-01 07:55:58', '2024-11-01 07:55:58');
 
 -- --------------------------------------------------------
 
@@ -99,17 +97,19 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
-(4, '2019_08_19_000000_create_failed_jobs_table', 1),
-(5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(6, '2024_09_14_161453_create_sessions_table', 1),
-(7, '2024_09_14_162706_create_categories_table', 1),
-(8, '2024_09_14_162810_create_brands_table', 1),
-(9, '2024_09_14_162844_create_sizes_table', 1),
-(10, '2024_09_14_162915_create_products_table', 1),
-(11, '2024_10_25_095203_create_product_size_stocks_table', 2);
+(14, '2014_10_12_000000_create_users_table', 1),
+(15, '2014_10_12_100000_create_password_resets_table', 1),
+(16, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(17, '2019_08_19_000000_create_failed_jobs_table', 1),
+(18, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(19, '2024_09_14_161453_create_sessions_table', 1),
+(20, '2024_09_14_162706_create_categories_table', 1),
+(21, '2024_09_14_162810_create_brands_table', 1),
+(22, '2024_09_14_162844_create_sizes_table', 1),
+(23, '2024_09_14_162915_create_products_table', 1),
+(24, '2024_10_25_095203_create_product_size_stocks_table', 1),
+(25, '2024_10_29_054853_create_product_stocks_table', 1),
+(26, '2024_11_01_062323_create_return_products_table', 1);
 
 -- --------------------------------------------------------
 
@@ -169,24 +169,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `user_id`, `category_id`, `brand_id`, `name`, `sku`, `image`, `cost_price`, `retail_price`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, 1, 'fgdfh tr', '3453', 'C:\\Users\\user\\AppData\\Local\\Temp\\php89D5.tmp', 4534.00, 3000.00, '2024', 'sdfsaf sf fasf', 1, '2024-10-17 02:10:22', '2024-10-17 02:10:22'),
-(2, NULL, 1, 1, 'fgdfh tr', '235de', 'storage/product_image/qCfoUSlCHyHpNa2lNVccZgaEJP0IJpEkc4DolLEJsH169d3nKX4lI9lO7XGx.jpeg', 4534.00, 3000.00, '2024', 'sdfsaf sf fasf', 1, '2024-10-17 02:17:32', '2024-10-17 02:17:32'),
-(3, NULL, 1, 1, 'fgdfh tr', '235dett', 'storage/product_image/4j2HW7kSp5Ts5cWiXAOkEdYvVhuEZxeRCApmLiRw2fjBVsIhbAFYZ5bW75Z4.jpeg', 4534.00, 3000.00, '2024', 'sdfsaf sf fasf', 1, '2024-10-17 02:18:15', '2024-10-17 02:18:15'),
-(4, NULL, 1, 1, 'fgdfh tr', '235dettse', 'storage/product_image/cODyQhQGUvVgCUy4FWT36gGdc7pfaT0fAcwQ0URwPo3xVgiDFVlt4ge1Tjhf.jpeg', 4534.00, 3000.00, '2024', 'sdfsaf sf fasf', 1, '2024-10-17 02:19:32', '2024-10-17 02:19:32'),
-(5, NULL, 2, 2, 'sdgfsdgdg dfg dg', 'erwrwrw', 'storage/product_image/ahDVhwUSBrSQokXj9G3ZfimhA4LwbzHnzv3Rc15YEafsFLk7V7O3s4ERe9v5.jpeg', 4534.00, 3000.00, '2024', 'sdfsaf sf fasf', 0, '2024-10-17 02:21:00', '2024-10-17 02:21:00'),
-(6, NULL, 1, 1, 'T-shirt test', '3453po', 'storage/product_image/OjfJGxWundIi8o5eM9W5G60qYttP9FG4sPYEfj8liu96s0Mrx7o10yvikbGS.png', 450.00, 300.00, '2024', 'test t-shirt 1111', 1, '2024-10-24 23:39:17', '2024-10-24 23:39:17'),
-(7, NULL, 2, 2, 'dfgdgd ege gvdeg', 'sdffte34 5', 'storage/product_image/ursHB9sH1m1uEDtU8te3pZ2ZVLWVVY5CCpYlS4bVkZt9iCbDwp0QkYO3f6P7.png', 44533.00, 4535.00, '2024', 'sdfasfasf sdfasf asfas', 1, '2024-10-24 23:49:34', '2024-10-24 23:49:34'),
-(8, NULL, 2, 3, 'sdfdasfasd fasdfas', 'gfh1', 'storage/product_image/cdU4k17lBYljzqIDvRnAtupex7Yk8FKM2Njnl4xjrXAUjU8i3Y7W0nKWMFBK.png', 34433.00, 3333.00, '2024', 'sadfasf sfas fasfasfsf', 1, '2024-10-25 02:14:38', '2024-10-25 02:14:38'),
-(9, NULL, 2, 3, 'sdfasf sfasfas', 'sdafasr', 'storage/product_image/pFBcgqckHwPhOFN5dgWUupYyNe1PyxwTkfmB3Afb2NHn9hXIGWuWNlwWmryC.jpg', 4444.00, 3333.00, '2024', 'fasfasfasf', 1, '2024-10-25 02:16:47', '2024-10-25 02:16:47'),
-(10, NULL, 3, 3, 'sdfasfefasdfvas fasdf', 'sfsfasfasfasfas', 'storage/product_image/jbkjGgC5crXUD0l3NP4V3vBBuyMhCa9er8acrokaKLNmXrzg6BTvuDUKK8PU.jpg', 55555.00, 4444.00, '2024', 'gdg gdgsd gdgsd gsdgsdgsdg', 1, '2024-10-25 02:20:56', '2024-10-25 02:20:56'),
-(11, 1, 2, 4, 'fsafs fsdfas fasf', 'sdfsarwerwr', 'storage/product_image/qPLZ47lpDjn13YxIkKATLqorJfM2n0ck3AEAF3I20HgzPGtHcEGaCfkQCzFh.jpeg', 55555.00, 5555.00, '2024', 'sdfafdsafasd fasfas fasf', 1, '2024-10-25 02:34:09', '2024-10-25 02:34:09'),
-(12, 1, 2, 1, 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy', 'tyuuiop', 'storage/product_image/f79qMgFc2iHXyOPq0y648Qako8bQefgDypcj0RsieRsOXdRmaYePjr4J6G1C.png', 6666.00, 5555.00, '2024', 'yuiopppppppppppppppppppppppppppppppp', 1, '2024-10-25 04:19:41', '2024-10-25 04:19:41'),
-(13, 1, 1, 1, 'sdfgsdgfs', 'fsdgsdg', 'storage/product_image/3IWdwYygG4Woqzsn2HH947w1cYrt9JscbPunbmZJlbRw1BvgVoDl0s7qyUNJ.jpg', 777.00, 666.00, '2024', 'sdgf dfsg sdfg sdfgdyyyyyyyyyyyyyyyyyyyy', 1, '2024-10-25 04:22:42', '2024-10-25 04:22:42'),
-(14, 1, 1, 1, 'sdafsssssssssssssssssssssssssssssss', 'sffrrefff', 'storage/product_image/YKETMnhHWCReztpreJryuZAy3IzLHi4afTgq7XlqjBwxpkBQ21yDpKER88wk.jpeg', 444.00, 443.00, '2024', 'sadfasf asdfas fasf', 1, '2024-10-25 04:38:45', '2024-10-25 04:38:45'),
-(15, 1, 1, 1, 'sdafsssssssssssssssssssssssssssssss', 'ggggggggg', 'storage/product_image/5tQLENILlRoelXNBacRy4zRPxKipLj8nLvh8MkIGZxe4zbWQXoiGm1NeOf5g.jpeg', 444.00, 443.00, '2024', 'sadfasf asdfas fasf', 1, '2024-10-25 04:40:29', '2024-10-25 04:40:29'),
-(16, 1, 3, 3, 'iiiiiiiiiiiiiii', 'iiiiii', 'storage/product_image/kstPJDN9p5vGKFLiDR9ZycOSFL6jAQE9OKcVguaXLgKQZJOssiyOFeeWlEns.png', 999.00, 888.00, '2024', 'asdffadfasfasfasf', 1, '2024-10-25 04:42:34', '2024-10-25 04:42:34'),
-(17, 1, 2, 2, 'LLLLLLLLLLLLLLLL', 'LLLLLLLLLLLLLLLLLL', 'storage/product_image/5ewix8vmyqjMhXSVFr9LETKeR8UV9GSBYFD7ZDgfFeJ8HBnPrKCs0u8VARGz.png', 999.00, 888.00, '2024', 'LLLLLLLLLLLLLL', 1, '2024-10-25 04:44:56', '2024-10-25 04:44:56'),
-(18, 1, 1, 1, 'afaf asfdafaf 12', 'SKU 45', 'storage/product_image/3VPORMCzNEMoG32eiXk0xdaIG0U6FnPbcGpD0e8JubFu86eWsjfOIvnKvID7.jpg', 1234.00, 1122.00, '2024', 'tesrs sfasfas fasf asfasfas', 1, '2024-10-25 04:55:26', '2024-10-25 04:55:26');
+(1, 1, 3, 1, 'This is test product', 'RTC12', 'storage/product_image/pBY4VciUybjkVdHRLRSZ1n8gYBqPj5mDZMnRtMx2Tpcdk65rPdnEZrRza5Rq.jpeg', 1200.00, 1000.00, '2024', 'This is test product description', 1, '2024-11-01 07:58:51', '2024-11-01 07:58:51');
 
 -- --------------------------------------------------------
 
@@ -209,14 +192,67 @@ CREATE TABLE `product_size_stocks` (
 --
 
 INSERT INTO `product_size_stocks` (`id`, `product_id`, `size_id`, `location`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'A1', 44, '2024-10-25 04:22:42', '2024-10-25 04:22:42'),
-(2, 1, NULL, 'B1', 33, '2024-10-25 04:22:42', '2024-10-25 04:22:42'),
-(3, 17, 1, 'L!', 22, '2024-10-25 04:44:56', '2024-10-25 04:44:56'),
-(4, 17, 2, 'L2', 12, '2024-10-25 04:44:56', '2024-10-25 04:44:56'),
-(5, 17, 3, 'L3', 11, '2024-10-25 04:44:56', '2024-10-25 04:44:56'),
-(6, 18, 1, 'R1', 12, '2024-10-25 04:55:26', '2024-10-25 04:55:26'),
-(7, 18, 2, 'R2', 22, '2024-10-25 04:55:26', '2024-10-25 04:55:26'),
-(8, 18, 3, 'RT', 111, '2024-10-25 04:55:26', '2024-10-25 04:55:26');
+(1, 1, 1, 'C1', 30, '2024-11-01 07:58:51', '2024-11-01 23:57:35'),
+(2, 1, 2, 'C2', 22, '2024-11-01 07:58:51', '2024-11-01 08:07:48'),
+(3, 1, 3, 'C3', 23, '2024-11-01 07:58:51', '2024-11-01 08:07:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_stocks`
+--
+
+CREATE TABLE `product_stocks` (
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED DEFAULT NULL,
+  `size_id` bigint UNSIGNED DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `date` date NOT NULL,
+  `status` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'in',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_stocks`
+--
+
+INSERT INTO `product_stocks` (`id`, `product_id`, `size_id`, `quantity`, `date`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 15, '2024-11-01', 'in', '2024-11-01 07:59:52', '2024-11-01 08:02:19'),
+(2, 1, 2, 15, '2024-11-01', 'in', '2024-11-01 07:59:52', '2024-11-01 08:02:19'),
+(3, 1, 3, 15, '2024-11-01', 'in', '2024-11-01 07:59:52', '2024-11-01 08:02:19'),
+(4, 1, 1, 5, '2024-11-01', 'out', '2024-11-01 08:00:42', '2024-11-01 08:00:42'),
+(5, 1, 2, 5, '2024-11-01', 'out', '2024-11-01 08:00:42', '2024-11-01 08:00:42'),
+(6, 1, 3, 5, '2024-11-01', 'out', '2024-11-01 08:00:42', '2024-11-01 08:00:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_products`
+--
+
+CREATE TABLE `return_products` (
+  `id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED DEFAULT NULL,
+  `size_id` bigint UNSIGNED DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `return_products`
+--
+
+INSERT INTO `return_products` (`id`, `product_id`, `size_id`, `quantity`, `date`, `created_at`, `updated_at`) VALUES
+(4, 1, 1, 5, '2024-11-01', '2024-11-01 08:06:40', '2024-11-01 08:06:40'),
+(5, 1, 2, 5, '2024-11-01', '2024-11-01 08:06:40', '2024-11-01 08:06:40'),
+(6, 1, 3, 5, '2024-11-01', '2024-11-01 08:06:40', '2024-11-01 08:06:40'),
+(7, 1, 1, 1, '2024-11-01', '2024-11-01 08:07:48', '2024-11-01 08:07:48'),
+(8, 1, 2, 2, '2024-11-01', '2024-11-01 08:07:48', '2024-11-01 08:07:48'),
+(9, 1, 3, 3, '2024-11-01', '2024-11-01 08:07:49', '2024-11-01 08:07:49'),
+(10, 1, 1, 9, '2024-11-01', '2024-11-01 23:57:35', '2024-11-01 23:57:35');
 
 -- --------------------------------------------------------
 
@@ -238,8 +274,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('gEAEPzYvpXBwJdJqhr6aFzWKlE7Hu7ML6S2vgPMU', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiV1B4anlXSkhwVUpENTlEY1B4VUFwUkVPVEpLblBXbnFqbGxkcm9GRiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0cyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCQuODJCWjhOR3BNdUhLV3hwZkduNUR1SW5LZHdNaFp3WHV1RGYyelRLR1pnbC9HUks5N0NpMiI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkLjgyQlo4TkdwTXVIS1d4cGZHbjVEdUluS2R3TWhad1h1dURmMnpUS0daZ2wvR1JLOTdDaTIiO30=', 1729853726),
-('xTvfovWsjPcJn13hMypwLQ9FttudBcCflxxsHLIX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiZ2poYmlNN056RkhjaXN4blZaYTk1bkYwWDdBbXFXN2dWUlV3bzJvRCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcHJvZHVjdHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkLjgyQlo4TkdwTXVIS1d4cGZHbjVEdUluS2R3TWhad1h1dURmMnpUS0daZ2wvR1JLOTdDaTIiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJC44MkJaOE5HcE11SEtXeHBmR241RHVJbktkd01oWndYdXVEZjJ6VEtHWmdsL0dSSzk3Q2kyIjt9', 1729853820);
+('1cZik7kSM5G84SWosE5Gt9qsofx7LNb1U5J6vpng', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiS2xjaDl6RzVoc2F0Rks5SURta1oySmxwemRySjlzbWF4Zk0yWWRhWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VycyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRtY3AzcWVrSGNOYklrYzU3c1d0dVV1ZVJnMGhuYU9SNmNRWlcwcGIuQzZBbm04dmpqTUZodSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkbWNwM3Fla0hjTmJJa2M1N3NXdHVVdWVSZzBobmFPUjZjUVpXMHBiLkM2QW5tOHZqak1GaHUiO30=', 1730616741);
 
 -- --------------------------------------------------------
 
@@ -259,9 +294,9 @@ CREATE TABLE `sizes` (
 --
 
 INSERT INTO `sizes` (`id`, `size`, `created_at`, `updated_at`) VALUES
-(1, 'XL', '2024-10-13 00:07:31', '2024-10-13 00:07:31'),
-(2, 'XXL', '2024-10-13 00:07:40', '2024-10-13 00:07:40'),
-(3, 'Medium', '2024-10-13 00:07:48', '2024-10-13 00:07:48');
+(1, 'X', '2024-11-01 07:56:38', '2024-11-01 07:56:38'),
+(2, 'XL', '2024-11-01 07:56:41', '2024-11-01 07:56:41'),
+(3, 'XXL', '2024-11-01 07:56:47', '2024-11-01 07:56:47');
 
 -- --------------------------------------------------------
 
@@ -290,7 +325,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Sagor Ali BD', 'mdsagorali033@gmail.com', NULL, '$2y$10$.82BZ8NGpMuHKWxpfGn5DuInKdwMhZwXuuDf2zTKGZgl/GRK97Ci2', NULL, NULL, NULL, NULL, NULL, NULL, '2024-10-13 00:05:08', '2024-10-13 00:05:08');
+(1, 'Sagor Ali BD', 'mdsagorali033@gmail.com', NULL, '$2y$10$mcp3qekHcNbIkc57sWtuUueRg0hnaOR6cQZW0pb.C6Anm8vjjMFhu', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-01 07:54:31', '2024-11-01 07:54:31'),
+(2, 'Admin', 'admin@gmail.com', NULL, '$2y$10$ko7/7jxmtLeQfEbmfMujueil4XmBsv96fnpHvFw4GrXJ8Tb/Nlnwe', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-01 22:23:13', '2024-11-01 22:23:13'),
+(3, 'Rony Islam', 'rony@gmail.com', NULL, '$2y$10$PGD6xuzspsWBolkLhKNZCetq2ll261B8pDNINQyomoAeJZJExkD/a', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-01 22:57:31', '2024-11-01 22:57:31'),
+(7, 'Roja Moni1', 'rojamoni@gmail.com', NULL, '$2y$10$ap8Fph8U7wUrzEvzL/hseuDx.Ci4Z.5CqWxcHc6c9ZQQvg4yRPONG', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-01 23:23:03', '2024-11-01 23:39:26');
 
 --
 -- Indexes for dumped tables
@@ -353,6 +391,22 @@ ALTER TABLE `product_size_stocks`
   ADD KEY `product_size_stocks_size_id_foreign` (`size_id`);
 
 --
+-- Indexes for table `product_stocks`
+--
+ALTER TABLE `product_stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_stocks_product_id_foreign` (`product_id`),
+  ADD KEY `product_stocks_size_id_foreign` (`size_id`);
+
+--
+-- Indexes for table `return_products`
+--
+ALTER TABLE `return_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `return_products_product_id_foreign` (`product_id`),
+  ADD KEY `return_products_size_id_foreign` (`size_id`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -381,7 +435,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -399,7 +453,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -411,13 +465,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_size_stocks`
 --
 ALTER TABLE `product_size_stocks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_stocks`
+--
+ALTER TABLE `product_stocks`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `return_products`
+--
+ALTER TABLE `return_products`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -429,7 +495,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -449,6 +515,20 @@ ALTER TABLE `products`
 ALTER TABLE `product_size_stocks`
   ADD CONSTRAINT `product_size_stocks_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `product_size_stocks_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `product_stocks`
+--
+ALTER TABLE `product_stocks`
+  ADD CONSTRAINT `product_stocks_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `product_stocks_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `return_products`
+--
+ALTER TABLE `return_products`
+  ADD CONSTRAINT `return_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `return_products_size_id_foreign` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
