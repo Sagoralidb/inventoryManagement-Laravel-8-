@@ -24,13 +24,13 @@
                 <div class="col-lg-3 col-6">
                   <!-- small box -->
                   <div class="small-box bg-info">
-                    <div class="inner text-center">
+                    <div class="inner">
                       <h3>{{$totalUser ?? 0}}</h3>
 
                       <p>User</p>
                     </div>
                     <div class="icon">
-                      <i class="ion ion-bag"></i>
+                      <i class="fa fa-users"></i>
                     </div>
                     <a href="{{route('users.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
@@ -39,14 +39,14 @@
                 <div class="col-lg-3 col-6">
                   <!-- small box -->
                   <div class="small-box bg-success">
-                    <div class="inner text-center">
+                    <div class="inner">
                       {{-- <h3>{{ $totalProduct ?? 0}}<sup style="font-size: 20px">%</sup></h3> --}}
                       <h3>{{ $totalProduct ?? 0}}</h3>
 
                       <p>Total Product</p>
                     </div>
                     <div class="icon">
-                      <i class="ion ion-stats-bars"></i>
+                        <i class="fab fa-product-hunt nav-icon"></i>
                     </div>
                     <a href="{{route('products.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
@@ -55,13 +55,13 @@
                 <div class="col-lg-3 col-6">
                   <!-- small box -->
                   <div class="small-box bg-secondary">
-                    <div class="inner text-center">
+                    <div class="inner">
                       <h3 class="text-light">{{$totalStockIn ?? 0}}</h3>
 
                       <p class="text-light">Total Stock In</p>
                     </div>
                     <div class="icon">
-                      <i class="ion ion-person-add"></i>
+                        <i class="fa fa-cart-plus nav-icon"></i>
                     </div>
                     <a href="{{route('stockHistory.admin')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
@@ -70,13 +70,13 @@
                 <div class="col-lg-3 col-6">
                   <!-- small box -->
                   <div class="small-box bg-danger">
-                    <div class="inner text-center">
+                    <div class="inner">
                       <h3>{{$totalReturnProduct ?? 0}}</h3>
 
                       <p>Total return product</p>
                     </div>
                     <div class="icon">
-                      <i class="ion ion-pie-graph"></i>
+                        <i class="fas fa-history"></i>
                     </div>
                     <a href="{{route('returnProductsHistory.admin')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>

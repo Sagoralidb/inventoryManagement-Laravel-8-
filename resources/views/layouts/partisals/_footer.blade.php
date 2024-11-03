@@ -5,5 +5,5 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong title="AdminLTE.io">Copyright &copy; {{ date('Y')}} <a href="http://sagoralibd.top/">{{config('app.name')}}</a>.</strong> Developed by Sagor Ali BD (Laravel+Vue.js).
   </footer>
